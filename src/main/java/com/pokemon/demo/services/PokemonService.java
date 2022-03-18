@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
@@ -22,7 +23,7 @@ public class PokemonService {
 	private final PokemonRepository pokemonRepository;
 	private final PokemonApiService pokemonApiService;
 
-	public List<PokemonDto> getAllPokemons() {
+	public Flux<PokemonDto> getAllPokemons() {
 		List<Pokemon> pokemonList = pokemonRepository.findAll();
 		List<PokemonDto> pokemonDtos = new ArrayList<>();
 		pokemonList.forEach(
@@ -55,7 +56,7 @@ public class PokemonService {
 					pokemonDto.setTypes(pokemonTypeDtos);
 					pokemonDtos.add(pokemonDto);
 				});
-		return pokemonDtos;
+		return Flux.fromIterable(pokemonDtos);
 	}
 
 	public void saveToDatabase(int number) {

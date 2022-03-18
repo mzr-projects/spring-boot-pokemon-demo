@@ -4,8 +4,7 @@ import com.pokemon.demo.payloads.PokemonDto;
 import com.pokemon.demo.services.PokemonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/pokemon")
@@ -20,7 +19,7 @@ public class PokemonController {
 	}
 
 	@GetMapping(value = "/all")
-	public List<PokemonDto> getAllPokemons() {
+	public Flux<PokemonDto> getAllPokemons() {
 		return pokemonService.getAllPokemons();
 	}
 }
