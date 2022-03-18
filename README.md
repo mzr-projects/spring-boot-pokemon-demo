@@ -1,7 +1,7 @@
 # spring-boot-pokemon-demo
 Spring boot pokemon demo
 
-This project fetch any number of pokemeons user wants and stores it into a In-Memory Database H2
+This project fetch any number of pokemeons user wants and stores it into the In-Memory Database H2
 
 In the following url 100 is the number of pokemons are going to be fetched and stored into the database
 Post Request : localhost:8080/pokemon/store/100 
