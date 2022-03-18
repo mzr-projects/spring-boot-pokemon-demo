@@ -61,7 +61,7 @@ public class PokemonService {
 	public void saveToDatabase(int number) {
 		for (int i = 1; i < number; i++) {
 			Mono<PokemonDto> mono = pokemonApiService.getPokemon(i);
-			mono.subscribe((data) -> {
+			mono.doOnError(System.out::println).subscribe((data) -> {
 				Pokemon pokemon = new Pokemon();
 				pokemon.setHeight(data.getHeight());
 				pokemon.setWeight(data.getWeight());
