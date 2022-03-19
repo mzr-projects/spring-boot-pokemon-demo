@@ -3,6 +3,6 @@ package com.pokemon.demo.payloads;
 import lombok.Data;
 
 @Data
-public class PokemonMove {
+public class PokemonMoveDto {
 	private Move move;
 }

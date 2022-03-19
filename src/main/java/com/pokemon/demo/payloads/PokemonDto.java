@@ -12,6 +12,6 @@ public class PokemonDto {
 	private String name;
 	private BigDecimal weight;
 	private BigDecimal height;
-	private List<PokemonMove> moves = new ArrayList<>();
+	private List<PokemonMoveDto> moves = new ArrayList<>();
 	private List<PokemonTypeDto> types = new ArrayList<>();
 }
