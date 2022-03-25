@@ -17,6 +17,6 @@ installed in your machine and with the following settings :
 
 host -> 127.0.0.1
 port -> 27017
-atabase -> pokoemon_docs and a created document named "pokemons" 
+database -> pokoemon_docs and a created document named "pokemons" 
 
 And thats basically it !
