@@ -1,6 +1,6 @@
 package com.pokemon.demo.controllers;
 
-import com.pokemon.demo.payloads.PokemonDto;
+import com.pokemon.demo.entities.Pokemon;
 import com.pokemon.demo.services.PokemonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class PokemonController {
 	}
 
 	@GetMapping(value = "/all")
-	public Flux<PokemonDto> getAllPokemons() {
+	public Flux<Pokemon> getAllPokemons() {
 		return pokemonService.getAllPokemons();
 	}
 }

@@ -10,29 +10,19 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Transactional
 public class PokemonService {
 
 	private final PokemonRepository pokemonRepository;
 	private final PokemonApiService pokemonApiService;
 
-	public Flux<PokemonDto> getAllPokemons() {
-		List<Pokemon> pokemonList = pokemonRepository.findAll();
-		List<PokemonDto> pokemonDtos = new ArrayList<>();
-		pokemonList.forEach(
-				element -> {
-					PokemonDto pokemonDto = new PokemonDto();
-					createPokemonDto(element, pokemonDto);
-					pokemonDtos.add(pokemonDto);
-				});
-		return Flux.fromIterable(pokemonDtos);
+	public Flux<Pokemon> getAllPokemons() {
+		return pokemonRepository.findAll();
 	}
 
 	private void createPokemonDto(Pokemon element, PokemonDto pokemonDto) {
@@ -68,10 +58,10 @@ public class PokemonService {
 	public void saveToDatabase(int number) {
 		for (int i = 1; i < number; i++) {
 			Mono<PokemonDto> mono = pokemonApiService.getPokemon(i);
-			mono.subscribe((data) -> {
+			mono.log().subscribe((data) -> {
 				Pokemon pokemon = createPokemonEntity(data);
-				pokemonRepository.save(pokemon);
-			});
+				pokemonRepository.save(pokemon).subscribe();
+			}, error -> System.err.println("Error : " + error));
 		}
 	}
 

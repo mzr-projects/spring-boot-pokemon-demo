@@ -1,39 +1,26 @@
 package com.pokemon.demo.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Document(collection = "pokemons")
 public class Pokemon {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@Column(unique = true)
 	private String name;
-
-	@Column(scale = 3)
 	private BigDecimal weight;
-
-	@Column(scale = 2)
 	private BigDecimal height;
-
-	@ElementCollection
 	private List<String> moves = new ArrayList<>();
-
-	@ElementCollection
 	private List<String> pokemonTypes = new ArrayList<>();
 }
 
